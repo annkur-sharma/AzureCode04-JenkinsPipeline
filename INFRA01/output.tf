@@ -21,4 +21,5 @@ output "root_output_virtual_machine_username" {
 output "root_output_virtual_machine_password" {
   description = "Virtual Machine Name: Password: ## ⚠️ For training purpose only. ## ❌ Not recommended to use a hardcoded password in production."
   value = module.module_virtual_machine.child_output_virtual_machine_password
+  sensitive = true
 }

@@ -32,5 +32,13 @@ pipeline {
       }
       }
     }
+
+    stage('Terraform Apply') {
+      steps {
+         dir('INFRA01') {
+         bat 'terraform apply tfplan
+      }
+      }
+    }
   }
 }

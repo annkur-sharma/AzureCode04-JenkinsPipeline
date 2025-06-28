@@ -28,7 +28,12 @@ pipeline {
     stage('Terraform Plan') {
       steps {
          dir('INFRA01') {
-        bat 'terraform plan -out=tfplan'
+         bat '''
+              terraform plan `
+              -var "main_provider_subscription_id=%ARM_SUBSCRIPTION_ID%" `
+              -var "user_prefix=eagle987" `
+              -out=tfplan
+             '''
       }
       }
     }

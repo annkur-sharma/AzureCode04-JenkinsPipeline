@@ -4,6 +4,12 @@ module "module_resource_group" {
   child_resource_location   = var.root_resource_location
 }
 
+module "module_resource_group2" {
+  source                    = "../modules/01-azurerm_resource_group"
+  child_resource_group_name = "${var.root_resource_group_name}-${local.formatted_user_prefix}-${local.formatted_user_prefix}"
+  child_resource_location   = var.root_resource_location
+}
+
 module "module_virtual_network" {
   depends_on                = [module.module_resource_group]
   source                    = "../modules/02-azurerm_vnet"

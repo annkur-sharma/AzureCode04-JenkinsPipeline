@@ -7,7 +7,11 @@ pipeline {
     ARM_TENANT_ID         = credentials('azure-tenant-id')
     ARM_SUBSCRIPTION_ID   = credentials('azure-subscription-id')
   }
-
+  
+ tools {
+    sonarQubeScanner 'SonarQubeScanner'
+  }
+  
   stages {
     stage('Checkout Code') {
       steps {
@@ -17,10 +21,18 @@ pipeline {
       }
     }
 
+    stage('SonarQube Analysis') {
+      steps {
+        withSonarQubeEnv('MySonarQube') {
+          bat 'sonar-scanner'
+        }
+      }
+    }
+    
     stage('Terraform Init') {
       steps {
         dir('INFRA01') {
-          sh 'terraform init -backend-config="backend-config-infra01.hcl"'
+          bat 'terraform init -backend-config="backend-config-infra01.hcl"'
         }
       }
     }
@@ -28,7 +40,7 @@ pipeline {
     stage('Terraform Plan') {
       steps {
          dir('INFRA01') {
-           sh 'terraform plan -var "main_provider_subscription_id=%ARM_SUBSCRIPTION_ID%" -var "user_prefix=eagle987" -out=tfplan'
+           bat 'terraform plan -var "main_provider_subscription_id=%ARM_SUBSCRIPTION_ID%" -var "user_prefix=eagle987" -out=tfplan'
         }
       }
     }
@@ -36,7 +48,7 @@ pipeline {
     stage('Terraform Apply') {
       steps {
          dir('INFRA01') {
-           sh 'terraform apply tfplan'
+           bat 'terraform apply tfplan'
         }
       }
     }   

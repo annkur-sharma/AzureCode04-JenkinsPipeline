@@ -19,13 +19,17 @@ pipeline {
 
     stage('Terraform Init') {
       steps {
+        dir('INFRA01') {
         bat 'terraform init -backend-config="backend-config-infra01.hcl"'
+      }
       }
     }
 
     stage('Terraform Plan') {
       steps {
+         dir('INFRA01') {
         bat 'terraform plan -out=tfplan'
+      }
       }
     }
   }

@@ -8,10 +8,6 @@ pipeline {
     ARM_SUBSCRIPTION_ID   = credentials('azure-subscription-id')
   }
   
- tools {
-    sonarQubeScanner 'SonarQubeScanner'
-  }
-  
   stages {
     stage('Checkout Code') {
       steps {

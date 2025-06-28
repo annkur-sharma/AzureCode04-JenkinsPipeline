@@ -19,13 +19,13 @@ pipeline {
 
     stage('Terraform Init') {
       steps {
-        sh 'terraform init -backend-config="backend-config-infra01.hcl"'
+        bat 'terraform init -backend-config="backend-config-infra01.hcl"'
       }
     }
 
     stage('Terraform Plan') {
       steps {
-        sh 'terraform plan -out=tfplan'
+        bat 'terraform plan -out=tfplan'
       }
     }
   }

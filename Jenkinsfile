@@ -41,6 +41,21 @@ pipeline {
       }
     }
 
+    stage('Approval') {
+      steps {
+        script {
+          def userInput = input(
+            id: 'Proceed',
+            message: 'Do you approve to proceed to deployment?',
+            parameters: [
+              choice(name: 'DEPLOY_ENV', choices: ['dev', 'staging', 'prod'], description: 'Select environment')
+            ]
+            )
+            echo "Approval received for environment: ${userInput}"
+          }
+        }
+      }
+
     stage('Terraform Apply') {
       steps {
          dir('INFRA01') {

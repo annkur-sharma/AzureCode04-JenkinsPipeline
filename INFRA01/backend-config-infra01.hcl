@@ -3,6 +3,7 @@
 # ❌ If the below resources are not present in the Azure Cloud, the terraform code will ❌ FAIL.
 
 resource_group_name  = "ankur01backendrg"                     # Example: "rg-backend"
-storage_account_name = "ankur01storage01"                     # Example: "rgbackendtorageaccount"
-container_name       = "ankur01storage01container"            # Example: "rgbackendstoragecontainer"
+storage_account_name = "ankur01storage01a"                     # Example: "rgbackendtorageaccount"
+container_name       = "ankur01storage01acontainer"            # Example: "rgbackendstoragecontainer"
 key                  = "AzureCode04GIT.terraform.tfstate"     # Example: "infra01.terraform.tfstate"
+
